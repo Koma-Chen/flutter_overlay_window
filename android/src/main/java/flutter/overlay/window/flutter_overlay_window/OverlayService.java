@@ -410,7 +410,8 @@ public class OverlayService extends Service implements View.OnTouchListener {
             switch (WindowSetup.positionGravity) {
                 case "auto":
                     mDestX = (params.x + (flutterView.getWidth() / 2)) <= szWindow.x / 2 ? 0 : szWindow.x - flutterView.getWidth();
-                    mDestY = (params.y + (flutterView.getHeight() / 2)) <= szWindow.y / 2 ? 0 : szWindow.y - flutterView.getHeight();
+                    if(params.y < 0 || (params.y + (flutterView.getHeight() / 2)) > szWindow.y)
+                        mDestY = 0;
                     return;
                 case "left":
                     mDestX = 0;
