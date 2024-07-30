@@ -384,8 +384,8 @@ public class OverlayService extends Service implements View.OnTouchListener {
                     if(yy < -322) {
                         params.y = -322;
                     }
-                    if(yy > 330) {
-                        params.y = 330;
+                    if(yy > 328) {
+                        params.y = 328;
                     }
                     if (windowManager != null) {
                         windowManager.updateViewLayout(flutterView, params);
