@@ -381,8 +381,8 @@ public class OverlayService extends Service implements View.OnTouchListener {
                     if(xx > szWindow.x - flutterView.getWidth()) {
                         params.x = szWindow.x - flutterView.getWidth();
                     }
-                    if(yy < 0) {
-                        params.y = 0;
+                    if(yy < -200) {
+                        params.y = -200;
                     }
                     if(yy > szWindow.y - flutterView.getHeight()) {
                         params.y = szWindow.y - flutterView.getHeight();
