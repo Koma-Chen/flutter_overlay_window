@@ -373,19 +373,32 @@ public class OverlayService extends Service implements View.OnTouchListener {
                             || WindowSetup.gravity == (Gravity.BOTTOM | Gravity.RIGHT);
                     int xx = params.x + ((int) dx * (invertX ? -1 : 1));
                     int yy = params.y + ((int) dy * (invertY ? -1 : 1));
-                    params.x = xx;
-                    params.y = yy;
-                    if(xx < 0) {
-                        params.x = 0;
+                    // 这里获取的szWindow.x是1920，但是获取的szWindow.x竟然是1008不是1080，所以都写死成1920*1080
+                    if (dx < 0) {
+                        if (xx < 0) {
+                            params.x = 0;
+                        } else {
+                            params.x = xx;
+                        }
+                    } else {
+                        if (xx > 1920 - flutterView.getWidth()) {
+                            params.x = 1920 - flutterView.getWidth();
+                        } else {
+                            params.x = xx;
+                        }
                     }
-                    if(xx > szWindow.x - flutterView.getWidth()) {
-                        params.x = szWindow.x - flutterView.getWidth();
-                    }
-                    if(yy < -322) {
-                        params.y = -322;
-                    }
-                    if(yy > 328) {
-                        params.y = 328;
+                    if (dy < 0) {
+                        if (yy < 0) {
+                            params.y = 0;
+                        } else {
+                            params.y = yy;
+                        }
+                    } else {
+                        if (yy > 1080 - flutterView.getHeight()) {
+                            params.y = 1080 - flutterView.getHeight();
+                        } else {
+                            params.y = yy;
+                        }
                     }
                     if (windowManager != null) {
                         windowManager.updateViewLayout(flutterView, params);
